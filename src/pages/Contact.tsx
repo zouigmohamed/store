@@ -9,8 +9,8 @@ const ContactPage = () => {
     backgroundImage: `url(${imageUrl})`,
   };
   return (
-    <div className="items-center justify-center flex p-5   lg:h-[800px]">
-      <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-3/4 mx-auto rounded-lg  h-3/4 ">
+    <div className="items-center justify-center flex   lg:h-[800px] w-full">
+      <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full mx-auto rounded-lg  h-3/4 ">
         <div className="p-4 grid grid-cols-1 lg:grid-cols-2 justify-between items-center h-full">
           <ContactForm />
           <div
