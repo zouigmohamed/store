@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.border{
+    border: 2px solid red;
+}
+.image-transition {
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .image-transition:hover {
+    opacity: 0.8;
+  }
+  .big-image-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 75%; 
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+  
+  .big-image-transition {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .big-image-transition:hover {
+    opacity: 0.8;
+  }
