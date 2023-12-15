@@ -1,50 +1,71 @@
 import {
   Button,
   Image,
-  Link,
   Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  NavbarMenu,
   NavbarMenuItem,
-  NavbarMenuToggle,
 } from "@nextui-org/react";
 import { useState } from "react";
 import { FaCartShopping } from "react-icons/fa6";
+import { IoMenu } from "react-icons/io5";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { menu } from "../data/index";
 import type { RootState } from "../redux/store";
 import CartModal from "./CartModal";
+import { IoMdClose } from "react-icons/io";
+
 export default function App() {
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const cart = useSelector((state: RootState) => state.cart);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
 
+  const handleOpenMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} className="">
+    <Navbar className="relative">
       <NavbarContent>
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
-        />
+        <span
+          className="md:hidden sm:block cursor-pointer"
+          onClick={handleOpenMenu}
+        >
+          {isMenuOpen ? <IoMdClose /> : <IoMenu />}
+        </span>
         <NavbarBrand>
-        <NavLink
+          <NavLink
             to="/"
             className="text-slate-900 font-semibold capitalize hover:text-black"
           >
-          <Image src="/logoipsum-280.svg" />
+            <Image src="/logoipsum-280.svg" />
           </NavLink>
         </NavbarBrand>
       </NavbarContent>
+     
+        <NavbarContent className={` left-[8%] border-2 rounded-lg h-auto absolute top-[64px] flex flex-col w-[84%] items-start  bg-white opacity-70 transition-all transform ${isMenuOpen ? "scale-100" : "scale-0"}`}>
+          {menu.map((item) => (
+            <NavbarMenuItem key={item.id} onClick={() => setIsMenuOpen(false)}>
+              <Link
+                to={item.link}
+                className="ml-2  font-semibold text-slate-900"
+                onClick={()=>handleOpenMenu()}
+              >
+                {item.name}
+              </Link>
+            </NavbarMenuItem>
+          ))}
+        </NavbarContent>
 
       <NavbarContent
         className="hidden sm:flex gap-4 text-slate-700 border-b-4 px-5 space-x-9 h-12"
@@ -55,16 +76,15 @@ export default function App() {
             to="/"
             className="text-slate-900 font-semibold capitalize hover:text-black"
           >
-            home
+            Home
           </NavLink>
         </NavbarItem>
-   
         <NavbarItem>
           <NavLink
             to="/about"
             className="text-slate-900 font-semibold capitalize hover:text-black"
           >
-            about us
+            About Us
           </NavLink>
         </NavbarItem>
         <NavbarItem>
@@ -72,7 +92,7 @@ export default function App() {
             to="/contact"
             className="text-slate-900 font-semibold capitalize hover:text-black"
           >
-            contact us
+            Contact Us
           </NavLink>
         </NavbarItem>
         <NavbarItem>
@@ -80,10 +100,11 @@ export default function App() {
             to="/cart"
             className="text-slate-900 font-semibold capitalize hover:text-black"
           >
-            cart
+            Cart
           </NavLink>
         </NavbarItem>
       </NavbarContent>
+
       <NavbarContent justify="end">
         <NavbarItem>
           <Button
@@ -95,7 +116,7 @@ export default function App() {
             Sign Up
           </Button>
         </NavbarItem>
-        <NavbarItem className="hidden lg:flex  ">
+        <NavbarItem className="hidden lg:flex">
           <Button
             as={Link}
             href="#"
@@ -107,37 +128,18 @@ export default function App() {
         </NavbarItem>
         <NavbarItem>
           <div className="relative cursor-pointer">
-            <FaCartShopping className="text-[1.8rem]" onClick={handleOpenModal} />
+            <FaCartShopping
+              className="text-[1.8rem]"
+              onClick={handleOpenModal}
+            />
             <span className="absolute bottom-5 left-5 text-white bg-red-600 w-5 h-5 text-sm flex items-center justify-center rounded-full">
               {cart.cartItems.length}
             </span>
           </div>
         </NavbarItem>
       </NavbarContent>
-      <NavbarMenu className="">
-        {menu.menuItems.map((item: string, index: number) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              color={
-                index === 0
-                  ? "primary"
-                  : index === menu.menuItems.length - 1
-                  ? "danger"
-                  : "foreground"
-              }
-              className="w-full"
-              href="#"
-              size="lg"
-            >
-              {item}
-            </Link>
-          </NavbarMenuItem>
-        ))}
-      </NavbarMenu>
-      <CartModal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-      />
+
+      <CartModal isOpen={isModalOpen} onClose={handleCloseModal} />
     </Navbar>
   );
 }

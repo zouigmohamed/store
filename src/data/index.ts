@@ -24,9 +24,28 @@ export const formFields:IFormFields[] = [
     required: true,
   },
 ];
-export const menu: IMenuItem = {
-  menuItems: ["Profile", "Dashboard", "Log Out"],
-};
+export const menu: IMenuItem[] = [
+  {
+    id: uuidv4(),
+    name: 'Home',
+    link: '/',
+  },
+  {
+    id: uuidv4(),
+    name: 'About',
+    link: '/about',
+  },
+  {
+    id: uuidv4(),
+    name: 'Contact',
+    link: '/contact',
+  },
+  {
+    id: uuidv4(),
+    name: 'Cart',
+    link: '/cart',
+  },
+];
 
 export const images = [
   "https://images.unsplash.com/photo-1549298916-f52d724204b4?q=80&w=1626&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",

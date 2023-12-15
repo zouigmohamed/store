@@ -1,7 +1,9 @@
 import { ReactNode } from "react";
 
 export interface IMenuItem {
-  menuItems: string[];
+  id: string;
+  name: string;
+  link: string;
 }
 export interface IProduct {
   id: string;
