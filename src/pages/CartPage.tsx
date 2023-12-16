@@ -21,7 +21,7 @@ const CartPage = () => {
   const dispatch = useAppDispatch();
   const totalPrice = useSelector(selectTotalPrice);
   const { cartItems } = useSelector((state: RootState) => state.cart);
-
+  const fees = 6; 
   const handleAddToCart = (product: IProduct) => {
     dispatch(AddProduct(product));
   };
@@ -114,7 +114,7 @@ const CartPage = () => {
             </div>
             <div className="flex justify-between">
               <span>*shipping fees :</span>
-              <span> ${((totalPrice * 5) / 100).toFixed(2)}</span>
+              <span> ${((totalPrice * fees ) / 100).toFixed(2)}</span>
             </div>
             <div className="flex justify-between">
               <span>subtotal :</span>
@@ -143,7 +143,7 @@ const CartPage = () => {
           </div>
           <div className="flex justify-between capitalize px-2">
             <span>total : </span>
-            <strong>$ {((totalPrice * 3) / 100 + totalPrice).toFixed(2)}</strong>
+            <strong>$ {((totalPrice * fees) / 100 + totalPrice).toFixed(2)}</strong>
           </div>
           <button
             disabled={cartItems.length === 0}
@@ -152,7 +152,7 @@ const CartPage = () => {
             checkout
           </button>
           <p className="bg-red-100 rounded-lg p-2 text-center">
-            *Additional fees of <strong>3%</strong> have been applied to the total price.
+            *Additional fees of <strong>{fees}%</strong> have been applied to the total price.
           </p>
         </div>
       </div>
