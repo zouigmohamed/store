@@ -7,7 +7,7 @@ import {
   NavbarItem,
   NavbarMenuItem,
 } from "@nextui-org/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaCartShopping } from "react-icons/fa6";
 import { IoMenu } from "react-icons/io5";
 import { useSelector } from "react-redux";
@@ -33,15 +33,32 @@ export default function App() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+  const handleResize = () => {
+    // Close the menu on window resize
+    setIsMenuOpen(false);
+  };
+  const handleScroll = () => {
+    // Close the menu on window resize
+    setIsMenuOpen(false);
+  };
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll);
+    
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
-    <Navbar className="relative">
+    <Navbar className=" fixed ">
       <NavbarContent>
         <span
           className="md:hidden sm:block cursor-pointer"
           onClick={handleOpenMenu}
         >
-          {isMenuOpen ? <IoMdClose /> : <IoMenu />}
+          {isMenuOpen ? <IoMdClose className="text-3xl"/> : <IoMenu className="text-3xl"/>}
         </span>
         <NavbarBrand>
           <NavLink
@@ -53,12 +70,13 @@ export default function App() {
         </NavbarBrand>
       </NavbarContent>
      
-        <NavbarContent className={` left-[8%] border-2 rounded-lg h-auto absolute top-[64px] flex flex-col w-[84%] items-start  bg-white opacity-70 transition-all transform ${isMenuOpen ? "scale-100" : "scale-0"}`}>
+      <NavbarContent className={` left-[8%] border-2 border-orange-300 rounded-lg h-auto absolute py-2 top-[64px] flex flex-col w-[84%] items-start  bg-white opacity-70 transition-all transform ${isMenuOpen ? "scale-100" : "scale-0"}`}
+      >
           {menu.map((item) => (
-            <NavbarMenuItem key={item.id} onClick={() => setIsMenuOpen(false)}>
+            <NavbarMenuItem key={item.id} onClick={() => setIsMenuOpen(false)} className="">
               <Link
                 to={item.link}
-                className="ml-2  font-semibold text-slate-900"
+                className="ml-2  font-semibold text-slate-900  hover:mx-4 duration-1000  hover:px-2   border-l-2 border-transparent  hover:border-emerald-500  "
                 onClick={()=>handleOpenMenu()}
               >
                 {item.name}

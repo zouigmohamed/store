@@ -61,7 +61,7 @@ const CartModal: React.FC<IPropsCartModal> = ({ isOpen, onClose }) => {
                   clear cart <FaRegTrashCan className="ml-2" />
                 </Button>
               </ModalHeader>
-              <ModalBody>
+              <ModalBody className="max-h-[70vh] overflow-y-auto mx-[2%] scrollbar">
                 {cartItems.length ? (
                   cartItems.map((item) => (
                     <div key={item.id} className="">

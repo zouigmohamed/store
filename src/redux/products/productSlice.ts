@@ -1,6 +1,7 @@
 import { IProduct, IPageInfo } from './../../interfaces/index';
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { products } from '../../data';
 
 interface ProductState {
     products: IProduct[];
@@ -8,7 +9,7 @@ interface ProductState {
 }
 
 const initialState: ProductState = {
-    products: [],
+    products: products,
     pageInfo: { 
         title: '',
         subtitle: '',

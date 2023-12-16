@@ -8,6 +8,9 @@ import {
 } from "@nextui-org/react";
 import { useState } from "react";
 import { IProduct } from "../interfaces";
+import { AddProduct } from "../redux/cart/cartSlice";
+import { useAppDispatch } from "../redux/store";
+
 interface IPropsMyModal {
   isOpen: boolean | undefined;
   onClose: () => void;
@@ -15,20 +18,24 @@ interface IPropsMyModal {
 }
 const MyModal: React.FC<IPropsMyModal> = ({ isOpen, onClose, product }) => {
   const [image, setImage] = useState<string>(product.image);
+  const dispatch = useAppDispatch();
 
+  const handleAddToCart = () => {
+    dispatch(AddProduct(product));
+  };
   return (
     <>
       <Modal backdrop={"blur"} isOpen={isOpen} onClose={onClose} size="3xl">
         <ModalContent style={{ width: "80%" }}>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
+              <ModalHeader className="flex flex-col gap-1 " >
                 Product details
               </ModalHeader>
-              <ModalBody className="flex justify-center flex-row items-center">
-                <div className="flex justify-center items-center w-full p-2 h-full ">
+              <ModalBody className="flex justify-center  flex-col lg:flex-row items-center ">
+                <div className="flex justify-center items-center w-full h-full  p-2">
                   <div className="big-image-container">
-                    <img src={image} alt="" className="big-image-transition" />
+                    <img src={image} alt="" className="big-image-transition border-2" />
                   </div>
                   <div className="flex gap-2 justify-center flex-col flex-wrap items-center">
                     {product.subImages.map((img, idx) => (
@@ -62,6 +69,7 @@ const MyModal: React.FC<IPropsMyModal> = ({ isOpen, onClose, product }) => {
                   Close
                 </Button>
                 <Button
+                  onClick={()=>handleAddToCart()}
                   color="primary"
                   onPress={onClose}
                   className="uppercase font-semibold w-full"

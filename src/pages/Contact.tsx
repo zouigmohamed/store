@@ -9,17 +9,17 @@ const ContactPage = () => {
     backgroundImage: `url(${imageUrl})`,
   };
   return (
-    <div className="items-center justify-center flex   lg:h-[800px] w-full">
+    <div className="items-center justify-center flex mt-[20%] md:mt-[10%]  lg:h-[800px] w-full">
       <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full mx-auto rounded-lg  h-3/4 ">
-        <div className="p-4 grid grid-cols-1 lg:grid-cols-2 justify-between items-center h-full">
+        <div className="p-4 grid grid-cols-1 lg:grid-cols-2 justify-between items-center h-full gap-2 lg:gap-0">
           <ContactForm />
           <div
-            className="w-full py-20 border-3 border-slate-400  h-full rounded-tr-xl items-center text-white flex flex-col justify-around rounded-br-xl "
+            className="w-full py-20 border-2 border-slate-400  h-full lg:rounded-tr-xl  rounded-xl lg:rounded-none  items-center text-white flex flex-col justify-around rounded-br-xl "
             style={backgroundImageStyle}
           >
-            <div className="backdrop-blur-md  flex flex-col justify-around h-full border-3 border-slate-500 rounded-md">
+            <div className="backdrop-blur-md  flex flex-col justify-around h-full  rounded-md">
               <div>
-                <div className="flex  justify-start ml-3 font-semibold text-[1.2rem] w-full space-x-4 mb-4 p-2 items-center">
+                <div className="flex  justify-start ml-3 font-semibold text-[1.2rem] w-full space-x-4 mb-4 p-2 items-center ">
                   <span className="">
                     <FaMapMarked />
                   </span>

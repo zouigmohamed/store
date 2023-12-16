@@ -12,7 +12,7 @@ import {
 } from "../redux/cart/cartSlice";
 import { RootState, useAppDispatch } from "../redux/store";
 const CartPage = () => {
-  const [couponCode, setCouponCode] = useState<string>("");
+  const [couponCode, setCouponCode] = useState<string>("Coupon_@2024_@");
   const handleCouponChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCouponCode(event.target.value);
   };
@@ -35,7 +35,7 @@ const CartPage = () => {
     dispatch(deleteProduct(id));
   };
   return (
-    <div className="w-full py-3 mt-5 lg:w-10/12 mx-auto lg:grid lg:grid-cols-6 aboutPage">
+    <div className="w-full  py-3 my-[10%] lg:w-10/12 mx-auto lg:grid lg:grid-cols-6 aboutPage">
       <div className=" col-span-4 mb-2 ">
         <div className="border-b-3 flex items-center">
           <h3 className="capitalize font-semibold  text-xl  w-3/4  p-2 mb-3 border-3 border-transparent">
@@ -52,7 +52,7 @@ const CartPage = () => {
           cartItems.map((item) => (
             <div
               key={item.id}
-              className="md:px-[2%] mt-2  items-center border-b-3 py-2 flex justify-between space-x-2  px-2 "
+              className="md:px-[2%] mt-2  items-center border-b-3 py-1 flex justify-between space-x-2  px-2 "
             >
               <div className="rounded-full overflow-hidden w-[100px] h-[100px] border-3 border-slate-700 p-[3px] ">
                 <img
@@ -102,7 +102,7 @@ const CartPage = () => {
           </h3>
         )}
       </div>
-      <div className="w-full  col-span-2 flex items-end">
+      <div className="w-full   col-span-2 flex items-end justify-center mt-7">
         <div className="lg:border-l-2 px-5 mx-1  flex flex-col space-y-3  ">
           <h3 className="capitalize font-semibold text-center text-xl border-b-4 w-full mx-auto pb-2 mb-3">
             Order summary
@@ -129,13 +129,13 @@ const CartPage = () => {
               className="border-4 rounded-lg px-2"
             />
             {couponCode && (
-              <p className="bg-red-100 rounded-md px-2 font-semibold  lowercase flex p-2 items-center ">
+              <p className="bg-red-100 rounded-md px-2 font-semibold   flex p-2 items-center ">
                 <RxCross1 className="mr-2 " />" {couponCode} " is not valid or
-                is an expired coupon.
+                is expired .
               </p>
             )}
             <button
-              className="bg-emerald-400 rounded-lg flex items-center justify-center uppercase py-1 disabled:cursor-not-allowed "
+              className="bg-emerald-400 rounded-lg flex items-center justify-center uppercase py-1 disabled:cursor-not-allowed disabled:opacity-60"
               disabled={isCouponCodeEmpty}
             >
               apply coupon
@@ -143,16 +143,16 @@ const CartPage = () => {
           </div>
           <div className="flex justify-between capitalize px-2">
             <span>total : </span>
-            <span>$ {((totalPrice * 5) / 100 + totalPrice).toFixed(2)}</span>
+            <strong>$ {((totalPrice * 3) / 100 + totalPrice).toFixed(2)}</strong>
           </div>
           <button
             disabled={cartItems.length === 0}
-            className="bg-red-500 p-2 rounded-lg font-semibold text-xl uppercase tracking-wider hover:bg-red-400 disabled:cursor-not-allowed"
+            className="bg-red-500 p-2 rounded-lg font-semibold text-xl uppercase tracking-wider hover:bg-red-400 disabled:cursor-not-allowed disabled:opacity-60 "
           >
             checkout
           </button>
           <p className="bg-red-100 rounded-lg p-2 text-center">
-            *Additional fees of 5% have been applied to the total price.
+            *Additional fees of <strong>3%</strong> have been applied to the total price.
           </p>
         </div>
       </div>

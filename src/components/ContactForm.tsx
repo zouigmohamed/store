@@ -33,7 +33,7 @@ const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-4 rounded-tl-xl  rounded-bl-xl w-full border-3 border-slate-400 h-full space-y-4 flex  flex-col justify-around">
+    <form onSubmit={handleSubmit} className="bg-white p-4 lg:rounded-tl-xl  rounded-xl lg:rounded-none w-full border-2 border-slate-400 h-full space-y-4 flex  flex-col justify-around">
       {formFields.map((field) => (
         <FormField key={field.name} {...field} value={formData[field.name]} onChange={handleChange} />
       ))}
