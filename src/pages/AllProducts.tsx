@@ -4,8 +4,7 @@ import Heading from "../components/Heading";
 import ProductCards from "../components/ProductCards";
 import { RootState } from "../redux/store";
 import image1 from "/images/storepic1.jpg"
-import image2 from "/images/storepic1.jpg"
-import image3 from "/images/storepic1.jpg"
+
 const AllProducts = () => {
   const { products, pageInfo } = useSelector(
     (state: RootState) => state.product
